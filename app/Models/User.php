@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -47,4 +48,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-}
+
+    public function coinListings()
+        {
+            return $this->hasMany(CoinListing::class, 'seller_id');
+        }
+
+    public function orders()
+        {
+            return $this->hasMany(Order::class, 'buyer_id');
+        }
+
+    public function approvedListings()
+        {
+            return $this->hasMany(CoinListing::class, 'approved_by');
+        }
+
+    }
