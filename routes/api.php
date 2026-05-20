@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Seller\CoinListingController as SellerCoinListingCo
 use App\Http\Controllers\Api\Seller\CoinListingImageController as SellerCoinListingImageController;
 use App\Http\Controllers\Api\Admin\CoinListingApprovalController;
 use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\Buyer\OrderController as BuyerOrderController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -57,6 +58,15 @@ Route::middleware(['auth:sanctum', 'role:seller'])
         Route::get('listings/pending', [CoinListingApprovalController::class, 'pending']);
         Route::post('listings/{listing}/approve', [CoinListingApprovalController::class, 'approve']);
         Route::post('listings/{listing}/reject', [CoinListingApprovalController::class, 'reject']);
+    });
+
+
+Route::middleware(['auth:sanctum', 'role:buyer'])
+    ->prefix('buyer')
+    ->group(function () {
+        Route::get('orders', [BuyerOrderController::class, 'index']);
+        Route::post('orders', [BuyerOrderController::class, 'store']);
+        Route::get('orders/{order}', [BuyerOrderController::class, 'show']);
     });
 
 
