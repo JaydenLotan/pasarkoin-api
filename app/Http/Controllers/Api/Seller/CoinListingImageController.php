@@ -85,9 +85,8 @@ class CoinListingImageController extends Controller
         ]);
 
         $listing->update([
-            'status' => 'pending',
-            'approved_by' => null,
-            'approved_at' => null,
+            'status' => 'approved',
+            'approved_at' => $listing->approved_at ?? now(),
             'rejection_reason' => null,
         ]);
 
@@ -137,9 +136,8 @@ class CoinListingImageController extends Controller
         }
 
         $listing->update([
-            'status' => 'pending',
-            'approved_by' => null,
-            'approved_at' => null,
+            'status' => 'approved',
+            'approved_at' => $listing->approved_at ?? now(),
             'rejection_reason' => null,
         ]);
 

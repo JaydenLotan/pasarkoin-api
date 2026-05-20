@@ -40,7 +40,8 @@ class CoinListingController extends Controller
             'coin_year' => $validated['coin_year'] ?? null,
             'material' => $validated['material'] ?? null,
             'condition' => $validated['condition'] ?? null,
-            'status' => 'pending',
+            'status' => 'approved',
+            'approved_at' => now(),
         ]);
 
         return response()->json([
@@ -87,9 +88,8 @@ class CoinListingController extends Controller
         ]);
 
         $listing->update(array_merge($validated, [
-            'status' => 'pending',
-            'approved_by' => null,
-            'approved_at' => null,
+            'status' => 'approved',
+            'approved_at' => $listing->approved_at ?? now(),
             'rejection_reason' => null,
         ]));
 
