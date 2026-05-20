@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Seller\CoinListingController as SellerCoinListingController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -35,3 +36,9 @@ Route::middleware(['auth:sanctum', 'role:buyer'])->get('/buyer/test', function (
         'message' => 'Buyer route working',
     ]);
 });
+
+Route::middleware(['auth:sanctum', 'role:seller'])
+    ->prefix('seller')
+    ->group(function () {
+        Route::apiResource('listings', SellerCoinListingController::class);
+    });
