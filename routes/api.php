@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Seller\CoinListingController as SellerCoinListingController;
 use App\Http\Controllers\Api\Seller\CoinListingImageController as SellerCoinListingImageController;
 use App\Http\Controllers\Api\Admin\CoinListingApprovalController;
+use App\Http\Controllers\Api\ListingController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -57,3 +58,8 @@ Route::middleware(['auth:sanctum', 'role:seller'])
         Route::post('listings/{listing}/approve', [CoinListingApprovalController::class, 'approve']);
         Route::post('listings/{listing}/reject', [CoinListingApprovalController::class, 'reject']);
     });
+
+
+
+Route::get('/listings', [ListingController::class, 'index']);
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
