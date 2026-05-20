@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Seller\CoinListingController as SellerCoinListingController;
+use App\Http\Controllers\Api\Seller\CoinListingImageController as SellerCoinListingImageController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -41,4 +42,8 @@ Route::middleware(['auth:sanctum', 'role:seller'])
     ->prefix('seller')
     ->group(function () {
         Route::apiResource('listings', SellerCoinListingController::class);
+
+        Route::get('listings/{listing}/images', [SellerCoinListingImageController::class, 'index']);
+        Route::post('listings/{listing}/images', [SellerCoinListingImageController::class, 'store']);
+        Route::delete('listings/{listing}/images/{image}', [SellerCoinListingImageController::class, 'destroy']);
     });
