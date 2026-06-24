@@ -13,6 +13,14 @@ class CoinImage extends Model
         'sort_order',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'is_primary' => 'boolean',
+            'sort_order' => 'integer',
+        ];
+    }
+
     public function coinListing()
     {
         return $this->belongsTo(CoinListing::class);
