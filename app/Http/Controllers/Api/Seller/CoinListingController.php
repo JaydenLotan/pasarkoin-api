@@ -94,7 +94,7 @@ class CoinListingController extends Controller
         ]));
 
         return response()->json([
-            'message' => 'Coin listing updated successfully and sent for review again',
+            'message' => 'Coin listing updated successfully',
             'data' => $listing,
         ]);
     }
