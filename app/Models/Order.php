@@ -17,6 +17,13 @@ class Order extends Model
         'seller_note',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'total_price' => 'decimal:2',
+        ];
+    }
+
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');

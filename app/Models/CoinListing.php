@@ -21,6 +21,14 @@ class CoinListing extends Model
         'rejection_reason',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'price' => 'decimal:2',
+            'approved_at' => 'datetime',
+        ];
+    }
+
     public function seller()
     {
         return $this->belongsTo(User::class, 'seller_id');
